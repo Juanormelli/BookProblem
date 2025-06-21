@@ -15,7 +15,7 @@ class Program
     public static decimal NearestSmallDecimal(List<decimal?> bookValues, decimal newBookValue)
     {
 
-        if ((decimal)bookValues.First() > newBookValue) return 0;
+        if ((decimal)bookValues.First() > newBookValue) return decimal.MinValue;
         if ((decimal)bookValues.Last() < newBookValue) return decimal.MaxValue;
 
         decimal nearestDecimal;
