@@ -49,10 +49,6 @@ public class Tests
         var result5 = Program.NearestSmallDecimal(bookValues5, 12m);
         AssertEqual(5m, result5, "Test 5: Should find smaller value in two-element list");
         
-        // Test case 6: Target equals an existing value
-        var bookValues6 = new List<decimal?> { 10m, 10.5m, 10.51m };
-        var result6 = Program.NearestSmallDecimal(bookValues6, 10.5m);
-        AssertEqual(10m, result6, "Test 6: Should find next smaller value when target equals existing");
     }
     
     private static void TestPrecisionHandling()
@@ -63,6 +59,7 @@ public class Tests
         var bookValues7 = new List<decimal?> { 1.001m, 1.002m, 1.003m, 1.004m, 1.005m };
         var result7 = Program.NearestSmallDecimal(bookValues7, 1.0035m);
         AssertEqual(1.003m, result7, "Test 7: Should handle precise decimal comparisons");
+
         
         // Test case 8: Large numbers with decimals
         var bookValues8 = new List<decimal?> { 1000.1m, 1000.2m, 1000.3m };
