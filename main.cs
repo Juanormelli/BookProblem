@@ -7,6 +7,7 @@ class Program
     public static void Main(string[] args)
     {
         Console.WriteLine("\n" + new string('=', 50));
+        Console.WriteLine(0.01m > 2.50m);
         Tests.RunAllTests();
         
     }
