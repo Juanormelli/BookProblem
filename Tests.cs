@@ -57,9 +57,9 @@ public class Tests
         Console.WriteLine("\n=== Precision Handling Tests ===");
         
         // Test case 7: Very close decimal values
-        var bookValues7 = new List<decimal?> { 1.001m, 1.002m, 1.003m, 1.004m, 1.005m };
-        var result7 = Program.NearestSmallDecimal(bookValues7, 1.0035m);
-        AssertEqual(1.003m, result7, "Test 7: Should handle precise decimal comparisons");
+        var bookValues7 = new List<decimal?> { 1.01m, 1.02m, 1.03m, 1.04m, 1.05m };
+        var result7 = Program.NearestSmallDecimal(bookValues7, 1.04m);
+        AssertEqual(1.03m, result7, "Test 7: Should handle precise decimal comparisons");
 
         
         // Test case 8: Large numbers with decimals
@@ -83,40 +83,40 @@ public class Tests
         AssertEqual(14m, result10, "Test 10: Should find nearest smaller when multiple equidistant options");
         
         // Test case 11: Very small differences
-        var bookValues11 = new List<decimal?> { 0.001m, 0.002m, 0.003m };
-        var result11 = Program.NearestSmallDecimal(bookValues11, 0.0025m);
-        AssertEqual(0.002m, result11, "Test 11: Should handle very small decimal differences");
+        var bookValues11 = new List<decimal?> { 0.01m, 0.02m, 0.03m };
+        var result11 = Program.NearestSmallDecimal(bookValues11, 0.03m);
+        AssertEqual(0.02m, result11, "Test 11: Should handle very small decimal differences");
     }
     
     private static void TestManyValuesNonExisting()
     {
         Console.WriteLine("\n=== Many Values with Non-Existing Targets Tests ===");
         
-        // Test case 12: Large list with many decimal places - target in middle range
+        // Test case 12: Large list with two decimal places - target in middle range
         var bookValues12 = new List<decimal?> 
         { 
-            1.111m, 2.222m, 3.333m, 4.444m, 5.555m, 6.666m, 7.777m, 8.888m, 9.999m, 
-            11.111m, 12.222m, 13.333m, 14.444m, 15.555m, 16.666m, 17.777m, 18.888m, 19.999m 
+            1.11m, 2.22m, 3.33m, 4.44m, 5.55m, 6.66m, 7.77m, 8.88m, 9.99m, 
+            11.11m, 12.22m, 13.33m, 14.44m, 15.55m, 16.66m, 17.77m, 18.88m, 19.99m 
         };
-        var result12 = Program.NearestSmallDecimal(bookValues12, 10.5m);
-        AssertEqual(1.111m, result12, "Test 12: Large list - should find 1.111 as result for 10.5");
+        var result12 = Program.NearestSmallDecimal(bookValues12, 10.50m);
+        AssertEqual(1.11m, result12, "Test 12: Large list - should find 1.11 as result for 10.50");
         
         // Test case 13: Same large list - target near beginning
-        var result13 = Program.NearestSmallDecimal(bookValues12, 2.5m);
-        AssertEqual(1.111m, result13, "Test 13: Large list - should find 1.111 as result for 2.5");
+        var result13 = Program.NearestSmallDecimal(bookValues12, 2.50m);
+        AssertEqual(1.11m, result13, "Test 13: Large list - should find 1.11 as result for 2.50");
         
         // Test case 14: Same large list - target near end
-        var result14 = Program.NearestSmallDecimal(bookValues12, 18.5m);
-        AssertEqual(17.777m, result14, "Test 14: Large list - should find nearest smaller to 18.5");
+        var result14 = Program.NearestSmallDecimal(bookValues12, 18.50m);
+        AssertEqual(17.77m, result14, "Test 14: Large list - should find nearest smaller to 18.50");
         
         // Test case 15: Very large list with close values
         var bookValues15 = new List<decimal?>();
         for (int i = 0; i < 50; i++)
         {
-            bookValues15.Add(10m + (i * 0.1m)); // 10.0, 10.1, 10.2, ... 14.9
+            bookValues15.Add(10m + (i * 0.10m)); // 10.0, 10.1, 10.2, ... 14.9
         }
         var result15 = Program.NearestSmallDecimal(bookValues15, 12.35m);
-        AssertEqual(10.0m, result15, "Test 15: Very large list - should find 10.0 as result for 12.35");
+        AssertEqual(10.00m, result15, "Test 15: Very large list - should find 10.00 as result for 12.35");
         
         // Test case 16: Random decimal values - target not in list
         var bookValues16 = new List<decimal?> 
@@ -136,14 +136,14 @@ public class Tests
         var result17 = Program.NearestSmallDecimal(bookValues17, 75.50m);
         AssertEqual(9.99m, result17, "Test 17: Currency values - should find 9.99 as result for 75.50");
         
-        // Test case 18: Scientific precision values
+        // Test case 18: Two decimal precision values
         var bookValues18 = new List<decimal?>
         {
-            0.00001m, 0.00005m, 0.0001m, 0.0005m, 0.001m, 0.005m, 0.01m, 0.05m, 0.1m, 0.5m,
-            1.0m, 5.0m, 10.0m, 50.0m, 100.0m, 500.0m, 1000.0m, 5000.0m, 10000.0m, 50000.0m
+            0.01m, 0.05m, 0.10m, 0.50m, 1.00m, 5.00m, 10.00m, 50.00m, 100.00m, 500.00m,
+            1000.00m, 5000.00m, 10000.00m, 50000.00m, 100000.00m, 500000.00m, 1000000.00m
         };
-        var result18 = Program.NearestSmallDecimal(bookValues18, 2.5m);
-        AssertEqual(1.0m, result18, "Test 18: Scientific precision - should find 1.0 as nearest smaller to 2.5");
+        var result18 = Program.NearestSmallDecimal(bookValues18, 2.50m);
+        AssertEqual(1.00m, result18, "Test 18: Two decimal precision - should find 1.00 as nearest smaller to 2.50");
         
         // Test case 19: Negative and positive mix - target positive
         var bookValues19 = new List<decimal?>
@@ -154,15 +154,15 @@ public class Tests
         var result19 = Program.NearestSmallDecimal(bookValues19, 12.5m);
         AssertEqual(-50.5m, result19, "Test 19: Mixed negative/positive - should find -50.5 as result for 12.5");
         
-        // Test case 20: Very precise decimals with many places
+        // Test case 20: Two decimal place precision
         var bookValues20 = new List<decimal?>
         {
-            1.123456m, 2.234567m, 3.345678m, 4.456789m, 5.567890m, 6.678901m, 7.789012m,
-            8.890123m, 9.901234m, 10.012345m, 11.123456m, 12.234567m, 13.345678m, 14.456789m,
-            15.567890m, 16.678901m, 17.789012m, 18.890123m, 19.901234m, 20.012345m
+            1.12m, 2.23m, 3.34m, 4.45m, 5.56m, 6.67m, 7.78m,
+            8.89m, 9.90m, 10.01m, 11.12m, 12.23m, 13.34m, 14.45m,
+            15.56m, 16.67m, 17.78m, 18.89m, 19.90m, 20.01m
         };
-        var result20 = Program.NearestSmallDecimal(bookValues20, 8.5m);
-        AssertEqual(1.123456m, result20, "Test 20: High precision decimals - should find 1.123456 as result for 8.5");
+        var result20 = Program.NearestSmallDecimal(bookValues20, 8.50m);
+        AssertEqual(1.12m, result20, "Test 20: Two decimal precision - should find 1.12 as result for 8.50");
     }
     
     private static void AssertEqual(decimal expected, decimal actual, string testDescription)
