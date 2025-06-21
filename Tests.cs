@@ -27,6 +27,9 @@ public static class Tests
         TestCase18_LargeGapsBetweenValues();
         TestCase19_AllSameValueExceptOne();
         TestCase20_ExtremelyLargeList();
+        TestCase21_10KItems();
+        TestCase22_100KItems();
+        TestCase23_1MillionItems();
 
         Console.WriteLine("All tests completed!\n");
     }
@@ -286,7 +289,7 @@ public static class Tests
         Console.WriteLine($"Test 20 - Large list (1000 items): Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")} (Time: {duration.TotalMilliseconds}ms)");
     }
 
-     private static void TestCase21_10KItems()
+    private static void TestCase21_10KItems()
     {
         var bookValues = new List<decimal?>();
         for (int i = 1; i <= 10000; i++)
@@ -305,7 +308,7 @@ public static class Tests
         Console.WriteLine($"Test 21 - Large list (10K items): Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")} (Time: {duration.TotalMilliseconds}ms)");
     }
 
-     private static void TestCase22_100KItems()
+    private static void TestCase22_100KItems()
     {
         var bookValues = new List<decimal?>();
         for (int i = 1; i <= 100000; i++)
@@ -334,7 +337,7 @@ public static class Tests
 
         Console.WriteLine($"Test 22b - Large list (100K items - Mid): Expected {expected2}, Got {result2} - {(result2 == expected2 ? "PASS" : "FAIL")} (Time: {duration.TotalMilliseconds}ms)");
 
-         // Test with value in last quarter
+        // Test with value in last quarter
         decimal newBookValue3 = 277500.5m; // Around item 75000
         decimal expected3 = 277500.0m; // 75000 * 3.7
 
@@ -348,7 +351,7 @@ public static class Tests
 
     }
 
-     private static void TestCase23_1MillionItems()
+    private static void TestCase23_1MillionItems()
     {
         var bookValues = new List<decimal?>();
         for (int i = 1; i <= 1000000; i++)

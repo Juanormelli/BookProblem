@@ -7,7 +7,7 @@ class Program
     public static void Main(string[] args)
     {
         Console.WriteLine("\n" + new string('=', 50));
-        
+
         Tests.RunAllTests();
         
     }
@@ -15,12 +15,12 @@ class Program
     public static decimal NearestSmallDecimal(List<decimal?> bookValues, decimal newBookValue)
     {
 
-      if((decimal)bookValues.First() > newBookValue) return 0;
-      if((decimal)bookValues.Last() < newBookValue) return decimal.MaxValue;
+        if ((decimal)bookValues.First() > newBookValue) return 0;
+        if ((decimal)bookValues.Last() < newBookValue) return decimal.MaxValue;
 
         decimal nearestDecimal;
         int count = bookValues.Count();
-        int mid = count  / 2;
+        int mid = count / 2;
         var BookByPrice = bookValues[mid];
 
         if (newBookValue < BookByPrice)
