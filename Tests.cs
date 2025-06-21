@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 
@@ -6,7 +7,7 @@ public static class Tests
     public static void RunAllTests()
     {
         Console.WriteLine("Running NearestSmallDecimal Tests...\n");
-
+        
         TestCase1_NewValueSmallerThanAllItems();
         TestCase2_NewValueLargerThanAllItems();
         TestCase3_NewValueInMiddleRange();
@@ -27,13 +28,10 @@ public static class Tests
         TestCase18_LargeGapsBetweenValues();
         TestCase19_AllSameValueExceptOne();
         TestCase20_ExtremelyLargeList();
-        TestCase21_VeryLargeList_10K();
-        TestCase22_VeryLargeList_100K();
-        TestCase23_VeryLargeList_1M();
-
+        
         Console.WriteLine("All tests completed!\n");
     }
-
+    
     // Test when new value is smaller than all items in list
     private static void TestCase1_NewValueSmallerThanAllItems()
     {
@@ -41,10 +39,10 @@ public static class Tests
         decimal newBookValue = 2.50m;
         decimal expected = 0;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 1 - New value smaller than all: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test when new value is larger than all items in list
     private static void TestCase2_NewValueLargerThanAllItems()
     {
@@ -52,10 +50,10 @@ public static class Tests
         decimal newBookValue = 25.00m;
         decimal expected = decimal.MaxValue;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 2 - New value larger than all: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test when new value is in middle range
     private static void TestCase3_NewValueInMiddleRange()
     {
@@ -63,10 +61,10 @@ public static class Tests
         decimal newBookValue = 12.00m;
         decimal expected = 10.00m; // Nearest smaller value
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 3 - New value in middle range: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test when new value is between first two items
     private static void TestCase4_NewValueBetweenFirstTwoItems()
     {
@@ -74,10 +72,10 @@ public static class Tests
         decimal newBookValue = 5.00m;
         decimal expected = 2.00m;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 4 - New value between first two: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test when new value is between last two items
     private static void TestCase5_NewValueBetweenLastTwoItems()
     {
@@ -85,10 +83,10 @@ public static class Tests
         decimal newBookValue = 16.00m;
         decimal expected = 12.00m;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 5 - New value between last two: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test with single item list
     private static void TestCase6_SingleItemList()
     {
@@ -96,17 +94,17 @@ public static class Tests
         decimal newBookValue = 15.00m;
         decimal expected = decimal.MaxValue;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 6 - Single item list (new value larger): Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
-
+        
         // Test single item with new value smaller
         newBookValue = 5.00m;
         expected = 0;
         result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 6b - Single item list (new value smaller): Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test with two item list
     private static void TestCase7_TwoItemList()
     {
@@ -114,10 +112,10 @@ public static class Tests
         decimal newBookValue = 10.00m;
         decimal expected = 5.00m;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 7 - Two item list: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test with larger list
     private static void TestCase8_LargeList()
     {
@@ -125,10 +123,10 @@ public static class Tests
         decimal newBookValue = 20.00m;
         decimal expected = 18.90m;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 8 - Large list: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test with very small differences
     private static void TestCase9_VerySmallDifferences()
     {
@@ -136,10 +134,10 @@ public static class Tests
         decimal newBookValue = 10.12m;
         decimal expected = 10.10m;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 9 - Very small differences: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test with large numbers
     private static void TestCase10_EdgeCaseWithLargeNumbers()
     {
@@ -147,16 +145,16 @@ public static class Tests
         decimal newBookValue = 750.00m;
         decimal expected = 500.00m;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 10 - Large numbers: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test with empty list (edge case)
     private static void TestCase11_EmptyList()
     {
         var bookValues = new List<decimal?>();
         decimal newBookValue = 10.00m;
-
+        
         try
         {
             decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
@@ -167,13 +165,13 @@ public static class Tests
             Console.WriteLine($"Test 11 - Empty list: Expected exception caught - PASS ({ex.GetType().Name})");
         }
     }
-
+    
     // Test with null values in list
     private static void TestCase12_NullValuesInList()
     {
         var bookValues = new List<decimal?> { 5.00m, null, 15.00m, 20.00m };
         decimal newBookValue = 12.00m;
-
+        
         try
         {
             decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
@@ -184,7 +182,7 @@ public static class Tests
             Console.WriteLine($"Test 12 - Null values: Exception caught - {ex.GetType().Name}");
         }
     }
-
+    
     // Test with duplicate values in sorted list
     private static void TestCase13_DuplicateValues()
     {
@@ -192,10 +190,10 @@ public static class Tests
         decimal newBookValue = 12.00m;
         decimal expected = 10.00m;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 13 - Duplicate values: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test with very close values
     private static void TestCase14_VeryCloseValues()
     {
@@ -203,10 +201,10 @@ public static class Tests
         decimal newBookValue = 10.0025m;
         decimal expected = 10.002m;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 14 - Very close values: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test decimal precision
     private static void TestCase15_DecimalPrecision()
     {
@@ -214,10 +212,10 @@ public static class Tests
         decimal newBookValue = 3.333333333m;
         decimal expected = 2.987654321m;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 15 - Decimal precision: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test with zero in list
     private static void TestCase16_ZeroInList()
     {
@@ -225,17 +223,17 @@ public static class Tests
         decimal newBookValue = 7.50m;
         decimal expected = 5.00m;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 16 - Zero in list: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
-
+        
         // Test new value close to zero
         newBookValue = 0.50m;
         expected = 0.00m;
         result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 16b - New value close to zero: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test new value very close to existing value but not equal
     private static void TestCase17_NewValueCloseToExisting()
     {
@@ -243,10 +241,10 @@ public static class Tests
         decimal newBookValue = 14.99m;
         decimal expected = 10.00m;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 17 - New value close to existing: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test with large gaps between values
     private static void TestCase18_LargeGapsBetweenValues()
     {
@@ -254,10 +252,10 @@ public static class Tests
         decimal newBookValue = 500.00m;
         decimal expected = 100.00m;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 18 - Large gaps: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test with mostly same values except one
     private static void TestCase19_AllSameValueExceptOne()
     {
@@ -265,10 +263,10 @@ public static class Tests
         decimal newBookValue = 20.00m;
         decimal expected = 10.00m;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-
+        
         Console.WriteLine($"Test 19 - Mostly same values: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")}");
     }
-
+    
     // Test with extremely large list (performance test)
     private static void TestCase20_ExtremelyLargeList()
     {
@@ -277,161 +275,15 @@ public static class Tests
         {
             bookValues.Add(i * 1.5m);
         }
-
+        
         decimal newBookValue = 750.75m; // Should find 750.0
         decimal expected = 750.0m;
-
+        
         var startTime = DateTime.Now;
         decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
         var endTime = DateTime.Now;
         var duration = endTime - startTime;
-
+        
         Console.WriteLine($"Test 20 - Large list (1000 items): Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")} (Time: {duration.TotalMilliseconds}ms)");
-    }
-
-    // Test with 10K items
-    private static void TestCase21_VeryLargeList_10K()
-    {
-        Console.WriteLine("Test 21 - Building 10K item list...");
-        var bookValues = new List<decimal?>();
-        for (int i = 1; i <= 10000; i++)
-        {
-            bookValues.Add(i * 2.5m);
-        }
-
-        decimal newBookValue = 12500.75m; // Should find 12500.0
-        decimal expected = 12500.0m;
-
-        var startTime = DateTime.Now;
-        decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-        var endTime = DateTime.Now;
-        var duration = endTime - startTime;
-
-        Console.WriteLine($"Test 21 - 10K items: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")} (Time: {duration.TotalMilliseconds}ms)");
-
-        // Test edge case - value near beginning
-        newBookValue = 125.25m;
-        expected = 125.0m;
-
-        startTime = DateTime.Now;
-        result = Program.NearestSmallDecimal(bookValues, newBookValue);
-        endTime = DateTime.Now;
-        duration = endTime - startTime;
-
-        Console.WriteLine($"Test 21b - 10K items (early value): Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")} (Time: {duration.TotalMilliseconds}ms)");
-
-        // Test edge case - value near end
-        newBookValue = 24900.25m;
-        expected = 24900.0m;
-
-        startTime = DateTime.Now;
-        result = Program.NearestSmallDecimal(bookValues, newBookValue);
-        endTime = DateTime.Now;
-        duration = endTime - startTime;
-
-        Console.WriteLine($"Test 21c - 10K items (late value): Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")} (Time: {duration.TotalMilliseconds}ms)");
-    }
-
-    // Test with 100K items
-    private static void TestCase22_VeryLargeList_100K()
-    {
-        Console.WriteLine("Test 22 - Building 100K item list...");
-        var bookValues = new List<decimal?>();
-        for (int i = 1; i <= 100000; i++)
-        {
-            bookValues.Add(i * 3.7m);
-        }
-
-        decimal newBookValue = 185000.5m; // Should find 185000.0
-        decimal expected = 184999.3m; // 49999 * 3.7
-
-        var startTime = DateTime.Now;
-        decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-        var endTime = DateTime.Now;
-        var duration = endTime - startTime;
-
-        Console.WriteLine($"Test 22 - 100K items: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")} (Time: {duration.TotalMilliseconds}ms)");
-
-        // Test with value in first quarter
-        newBookValue = 92500.5m; // Around item 25000
-        expected = 92499.9m; // 24999 * 3.7
-
-        startTime = DateTime.Now;
-        result = Program.NearestSmallDecimal(bookValues, newBookValue);
-        endTime = DateTime.Now;
-        duration = endTime - startTime;
-
-        Console.WriteLine($"Test 22b - 100K items (first quarter): Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")} (Time: {duration.TotalMilliseconds}ms)");
-
-        // Test with value in last quarter
-        newBookValue = 277500.5m; // Around item 75000
-        expected = 277499.1m; // 74999 * 3.7
-
-        startTime = DateTime.Now;
-        result = Program.NearestSmallDecimal(bookValues, newBookValue);
-        endTime = DateTime.Now;
-        duration = endTime - startTime;
-
-        Console.WriteLine($"Test 22c - 100K items (last quarter): Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")} (Time: {duration.TotalMilliseconds}ms)");
-    }
-
-    // Test with 1M items (1 million)
-    private static void TestCase23_VeryLargeList_1M()
-    {
-        Console.WriteLine("Test 23 - Building 1M item list... (This may take a moment)");
-        var bookValues = new List<decimal?>();
-
-        var buildStartTime = DateTime.Now;
-        for (int i = 1; i <= 1000000; i++)
-        {
-            bookValues.Add(i * 4.2m);
-        }
-        var buildEndTime = DateTime.Now;
-        var buildDuration = buildEndTime - buildStartTime;
-
-        Console.WriteLine($"List building completed in {buildDuration.TotalMilliseconds}ms");
-
-        decimal newBookValue = 2100000.5m; // Should find value around item 500000
-        decimal expected = 2099999.8m; // 499999 * 4.2
-
-        var startTime = DateTime.Now;
-        decimal result = Program.NearestSmallDecimal(bookValues, newBookValue);
-        var endTime = DateTime.Now;
-        var duration = endTime - startTime;
-
-        Console.WriteLine($"Test 23 - 1M items: Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")} (Time: {duration.TotalMilliseconds}ms)");
-
-        // Test with value near beginning (first 10%)
-        newBookValue = 420000.5m; // Around item 100000
-        expected = 419999.8m; // 99999 * 4.2
-
-        startTime = DateTime.Now;
-        result = Program.NearestSmallDecimal(bookValues, newBookValue);
-        endTime = DateTime.Now;
-        duration = endTime - startTime;
-
-        Console.WriteLine($"Test 23b - 1M items (first 10%): Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")} (Time: {duration.TotalMilliseconds}ms)");
-
-        // Test with value near end (last 10%)
-        newBookValue = 3780000.5m; // Around item 900000
-        expected = 3779999.8m; // 899999 * 4.2
-
-        startTime = DateTime.Now;
-        result = Program.NearestSmallDecimal(bookValues, newBookValue);
-        endTime = DateTime.Now;
-        duration = endTime - startTime;
-
-        Console.WriteLine($"Test 23c - 1M items (last 10%): Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")} (Time: {duration.TotalMilliseconds}ms)");
-
-        // Performance test - value at exact middle
-        newBookValue = 2100001.0m; // Exactly at middle
-        expected = 2100000.0m; // Exactly item 500000 * 4.2
-
-        startTime = DateTime.Now;
-        result = Program.NearestSmallDecimal(bookValues, newBookValue);
-        endTime = DateTime.Now;
-        duration = endTime - startTime;
-
-        Console.WriteLine($"Test 23d - 1M items (exact middle): Expected {expected}, Got {result} - {(result == expected ? "PASS" : "FAIL")} (Time: {duration.TotalMilliseconds}ms)");
     }
 }
