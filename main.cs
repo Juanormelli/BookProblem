@@ -30,7 +30,6 @@ class Program
             for (int i = mid - 1; i >= 0; i--)
             {
                 decimal newDifference = Math.Abs((decimal)bookValues[i] - newBookValue);
-                Console.WriteLine(newDifference + "    " + difference);
                 if (newDifference <= difference && bookValues[i] < newBookValue)
                 {
                     nearestDecimal = (decimal)bookValues[i];
@@ -41,8 +40,8 @@ class Program
         }
         else
         {
-            nearestDecimal = (decimal)bookValues[mid];
-            decimal difference = Math.Abs((decimal)bookValues[mid] - newBookValue);
+            nearestDecimal = (decimal)BookByPrice;
+            decimal difference = Math.Abs((decimal)BookByPrice - newBookValue);
             for (int i = mid + 1; i <= count - 1; i++)
             {
                 decimal newDifference = Math.Abs((decimal)bookValues[i] - newBookValue);
