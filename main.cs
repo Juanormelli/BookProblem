@@ -14,47 +14,27 @@ class Program
 
     public static decimal NearestSmallDecimal(List<decimal?> bookValues, decimal newBookValue)
     {
+        var filtered = bookValues;
 
-        if ((decimal)bookValues.First() > newBookValue) return decimal.MinValue;
-        if ((decimal)bookValues.Last() < newBookValue) return decimal.MaxValue;
+        if (bookValues.First() > newBookValue) return decimal.MinValue;
+        if (bookValues.Last() < newBookValue) return decimal.MaxValue;
 
-        decimal nearestDecimal;
-        int count = bookValues.Count();
-        int mid = count / 2;
-        var BookByPrice = bookValues[mid];
+        int left = 0, right = bookValues.Count - 1;
+        decimal result = decimal.MinValue;
 
-        if (newBookValue < BookByPrice)
+        while (left <= right)
         {
-            nearestDecimal = (decimal)bookValues[mid - 1];
-            decimal difference = Math.Abs((decimal)bookValues[mid - 1] - newBookValue);
-            for (int i = mid - 1; i >= 0; i--)
+            int mid = left + (right - left) / 2;
+            if (filtered[mid] < newBookValue)
             {
-                decimal newDifference = Math.Abs((decimal)bookValues[i] - newBookValue);
-                if (newDifference <= difference && bookValues[i] < newBookValue)
-                {
-                    nearestDecimal = (decimal)bookValues[i];
-                    difference = newDifference;
-                }
+                result = (decimal)bookValues[mid];
+                left = mid + 1;
             }
-
-        }
-        else
-        {
-            nearestDecimal = (decimal)BookByPrice;
-            decimal difference = Math.Abs((decimal)BookByPrice - newBookValue);
-            for (int i = mid + 1; i <= count - 1; i++)
+            else
             {
-                decimal newDifference = Math.Abs((decimal)bookValues[i] - newBookValue);
-                if (newDifference <= difference && bookValues[i] < newBookValue)
-                {
-                    nearestDecimal = (decimal)bookValues[i];
-                    difference = newDifference;
-                }
+                right = mid - 1;
             }
         }
-
-        return nearestDecimal;
+        return result;
     }
-
-
 }
