@@ -8,14 +8,14 @@ class Program
     {
         Console.WriteLine("\n" + new string('=', 50));
         Tests.RunAllTests();
-
+        
     }
 
     public static decimal NearestSmallDecimal(List<decimal?> bookValues, decimal newBookValue)
     {
 
-      if(bookValues.First() > newBookValue) return (decimal)bookValues.First();
-      if(bookValues.Last() < newBookValue) return (decimal)bookValues.Last();
+      if((decimal)bookValues.First() > newBookValue) return 0;
+      if((decimal)bookValues.Last() < newBookValue) return decimal.MaxValue;
 
         decimal nearestDecimal;
         int count = bookValues.Count();
