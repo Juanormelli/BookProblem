@@ -36,6 +36,9 @@ class Program
             Console.WriteLine(x);
         });
 
+        Console.WriteLine("\n" + new string('=', 50));
+        Tests.RunAllTests();
+
     }
 
     public static decimal NearestSmallDecimal(List<decimal?> bookValues, decimal newBookValue)
